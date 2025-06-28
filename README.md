@@ -22,7 +22,7 @@ An intelligent PDF-based research assistant that summarizes academic papers and 
 
 ## 📂 Folder Structure
 
-```
+```yaml
 ai-research-assistant/
 │
 ├── app.py # Streamlit app interface
@@ -32,8 +32,8 @@ ai-research-assistant/
 ├── sample_papers/ # Example PDFs (optional)
 ├── vector_store/ # Temporary FAISS vector index
 
+```
 ---
-
 ## 🚀 Getting Started
 
 ### 1. Clone the repo
@@ -41,19 +41,21 @@ ai-research-assistant/
 ```bash
 git clone https://github.com/Miraclechijioke/ai-research-assistant.git
 cd ai-research-assistant
-2. Install dependencies
-bash
-Copy
-Edit
+
+```
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
-3. Add your OpenAI API key
+```
+
+### 3. Add your OpenAI API key
 Create a .env file in the root:
 
-env
-Copy
-Edit
+```ini
 OPENAI_API_KEY=your_openai_key_here
-4. Run the app
+```
+### 4. Run the app
 bash
 Copy
 Edit
