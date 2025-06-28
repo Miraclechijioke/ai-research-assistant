@@ -62,14 +62,20 @@ streamlit run app.py
 
 ## 🛠 Built With
 -Streamlit
+
 -LangChain
+
 -FAISS
+
 -OpenAI API
+
 -PyMuPDF
 
 ## 👨‍💻 Author
 **Miracle Chijioke Alozie**
+
 _Associate Data Scientist & Machine Learning Engineer_
+
 [LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://bit.ly/MC_DataScience)
 
 ### ⭐️ Star This Repo
