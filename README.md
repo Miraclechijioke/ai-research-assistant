@@ -1,0 +1,72 @@
+# 🧠 AI Research Assistant
+
+An intelligent PDF-based research assistant that summarizes academic papers and answers questions about them — built with **Streamlit**, **LangChain**, **FAISS**, and **OpenAI's GPT**.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Built%20With-LangChain-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/LLM-OpenAI-brightgreen?style=flat-square" />
+  <img src="https://img.shields.io/badge/UI-Streamlit-orange?style=flat-square" />
+</p>
+
+---
+
+## 📌 Features
+
+- ✅ Upload a research paper (PDF)
+- 🧠 AI generates a **summary** instantly
+- 🔍 Ask context-aware questions and get **accurate answers**
+- 🧬 Uses vector search with **OpenAI Embeddings + FAISS**
+- ⚙️ Modular code design: easy to extend or deploy
+
+---
+
+## 📂 Folder Structure
+
+ai-research-assistant/
+│
+├── app.py # Streamlit app
+├── utils.py # PDF parsing + chunking + vector embedding
+├── requirements.txt # Python dependencies
+├── .env # API key (excluded from version control)
+├── sample_papers/ # Test PDFs (optional)
+├── vector_store/ # Temporary FAISS index store
+
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash```
+git clone https://github.com/Miraclechijioke/ai-research-assistant.git
+cd ai-research-assistant
+
+### 2. Install dependencies
+
+pip install -r requirements.txt
+
+### 3. Add your OpenAI API key
+Create a .env file in the root:
+
+OPENAI_API_KEY=your_openai_key_here
+
+### 4. Run the app
+```bash```
+
+streamlit run app.py
+
+### 🛠 Built With
+Streamlit
+LangChain
+FAISS
+OpenAI API
+PyMuPDF
+
+### 👨‍💻 Author
+Miracle Chijioke Alozie
+Associate Data Scientist & Machine Learning Engineer
+LinkedIn • GitHub • Portfolio
+
+### ⭐️ Star This Repo
+If you find this useful, feel free to give it a ⭐️ to support the project!
