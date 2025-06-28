@@ -68,8 +68,8 @@ streamlit run app.py
 -PyMuPDF
 
 ## 👨‍💻 Author
-Miracle Chijioke Alozie
-**Associate Data Scientist & Machine Learning Engineer**
+**Miracle Chijioke Alozie**
+_Associate Data Scientist & Machine Learning Engineer_
 [LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://bit.ly/MC_DataScience)
 
 ### ⭐️ Star This Repo
