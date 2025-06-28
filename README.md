@@ -60,16 +60,16 @@ OPENAI_API_KEY=your_openai_key_here
 streamlit run app.py
 ```
 
-### 🛠 Built With
-Streamlit
-LangChain
-FAISS
-OpenAI API
-PyMuPDF
+## 🛠 Built With
+-Streamlit
+-LangChain
+-FAISS
+-OpenAI API
+-PyMuPDF
 
-### 👨‍💻 Author
+## 👨‍💻 Author
 Miracle Chijioke Alozie
-#### Associate Data Scientist & Machine Learning Engineer
+**Associate Data Scientist & Machine Learning Engineer**
 [LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://bit.ly/MC_DataScience)
 
 ### ⭐️ Star This Repo
