@@ -22,6 +22,7 @@ An intelligent PDF-based research assistant that summarizes academic papers and 
 
 ## 📂 Folder Structure
 
+```
 ai-research-assistant/
 │
 ├── app.py # Streamlit app interface
@@ -30,10 +31,6 @@ ai-research-assistant/
 ├── .env # API key (excluded via .gitignore)
 ├── sample_papers/ # Example PDFs (optional)
 ├── vector_store/ # Temporary FAISS vector index
-
-yaml
-Copy
-Edit
 
 ---
 
