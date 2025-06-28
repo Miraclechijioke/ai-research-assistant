@@ -24,12 +24,12 @@ An intelligent PDF-based research assistant that summarizes academic papers and 
 
 ai-research-assistant/
 │
-├── app.py # Streamlit app
-├── utils.py # PDF parsing + chunking + vector embedding
-├── requirements.txt # Python dependencies
-├── .env # API key (excluded from version control)
-├── sample_papers/ # Test PDFs (optional)
-├── vector_store/ # Temporary FAISS index store
+├── app.py               # Streamlit app interface
+├── utils.py             # PDF parsing, chunking, vector store setup
+├── requirements.txt     # Project dependencies
+├── .env                 # API key (excluded via .gitignore)
+├── sample_papers/       # Example PDFs (optional)
+├── vector_store/        # Temporary FAISS vector index
 
 
 ---
@@ -38,10 +38,12 @@ ai-research-assistant/
 
 ### 1. Clone the repo
 
-```bash```
+```bash
 git clone https://github.com/Miraclechijioke/ai-research-assistant.git
 cd ai-research-assistant
 
+```
+```markdown
 ### 2. Install dependencies
 
 pip install -r requirements.txt
@@ -52,10 +54,12 @@ Create a .env file in the root:
 OPENAI_API_KEY=your_openai_key_here
 
 ### 4. Run the app
-```bash```
+```
+```bash
 
 streamlit run app.py
-
+```
+```markdown
 ### 🛠 Built With
 Streamlit
 LangChain
@@ -66,7 +70,7 @@ PyMuPDF
 ### 👨‍💻 Author
 Miracle Chijioke Alozie
 Associate Data Scientist & Machine Learning Engineer
-LinkedIn • GitHub • Portfolio
+**LinkedIn** • **GitHub** • **Portfolio**
 
 ### ⭐️ Star This Repo
 If you find this useful, feel free to give it a ⭐️ to support the project!
