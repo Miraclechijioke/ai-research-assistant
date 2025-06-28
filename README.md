@@ -66,11 +66,11 @@ LangChain
 FAISS
 OpenAI API
 PyMuPDF
-
+```
 ### 👨‍💻 Author
 Miracle Chijioke Alozie
 Associate Data Scientist & Machine Learning Engineer
-**LinkedIn** • **GitHub** • **Portfolio**
+[LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://salesonsales.com.ng/mc)
 
 ### ⭐️ Star This Repo
 If you find this useful, feel free to give it a ⭐️ to support the project!
