@@ -56,25 +56,21 @@ Create a .env file in the root:
 OPENAI_API_KEY=your_openai_key_here
 ```
 ### 4. Run the app
-bash
-Copy
-Edit
+```bash
 streamlit run app.py
-🛠 Built With
+```
+
+### 🛠 Built With
 Streamlit
-
 LangChain
-
 FAISS
-
 OpenAI API
-
 PyMuPDF
 
-👨‍💻 Author
+### 👨‍💻 Author
 Miracle Chijioke Alozie
 Associate Data Scientist & Machine Learning Engineer
-LinkedIn • GitHub • Portfolio
+[LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://bit.ly/MC_DataScience)
 
-⭐️ Star This Repo
+### ⭐️ Star This Repo
 If you find this useful, feel free to give it a ⭐️ to support the project!
