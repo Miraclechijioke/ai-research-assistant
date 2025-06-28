@@ -40,6 +40,7 @@ ai-research-assistant/
 
 ```bash```
 git clone https://github.com/Miraclechijioke/ai-research-assistant.git
+---
 cd ai-research-assistant
 
 ### 2. Install dependencies
