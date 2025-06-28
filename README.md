@@ -69,7 +69,7 @@ PyMuPDF
 
 ### 👨‍💻 Author
 Miracle Chijioke Alozie
-Associate Data Scientist & Machine Learning Engineer
+#### Associate Data Scientist & Machine Learning Engineer
 [LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://bit.ly/MC_DataScience)
 
 ### ⭐️ Star This Repo
