@@ -24,13 +24,16 @@ An intelligent PDF-based research assistant that summarizes academic papers and 
 
 ai-research-assistant/
 │
-├── app.py               # Streamlit app interface
-├── utils.py             # PDF parsing, chunking, vector store setup
-├── requirements.txt     # Project dependencies
-├── .env                 # API key (excluded via .gitignore)
-├── sample_papers/       # Example PDFs (optional)
-├── vector_store/        # Temporary FAISS vector index
+├── app.py # Streamlit app interface
+├── utils.py # PDF parsing, chunking, vector store setup
+├── requirements.txt # Project dependencies
+├── .env # API key (excluded via .gitignore)
+├── sample_papers/ # Example PDFs (optional)
+├── vector_store/ # Temporary FAISS vector index
 
+yaml
+Copy
+Edit
 
 ---
 
@@ -41,36 +44,38 @@ ai-research-assistant/
 ```bash
 git clone https://github.com/Miraclechijioke/ai-research-assistant.git
 cd ai-research-assistant
-
-```
-```markdown
-### 2. Install dependencies
-
+2. Install dependencies
+bash
+Copy
+Edit
 pip install -r requirements.txt
-
-### 3. Add your OpenAI API key
+3. Add your OpenAI API key
 Create a .env file in the root:
 
+env
+Copy
+Edit
 OPENAI_API_KEY=your_openai_key_here
-
-### 4. Run the app
-```
-```bash
-
+4. Run the app
+bash
+Copy
+Edit
 streamlit run app.py
-```
-```markdown
-### 🛠 Built With
+🛠 Built With
 Streamlit
+
 LangChain
+
 FAISS
+
 OpenAI API
+
 PyMuPDF
-```
-### 👨‍💻 Author
+
+👨‍💻 Author
 Miracle Chijioke Alozie
 Associate Data Scientist & Machine Learning Engineer
-[LinkedIn](https://linkedin.com/in/mchijioke) • [GitHub](https://github.com/Miraclechijioke) • [Portfolio](https://salesonsales.com.ng/mc)
+LinkedIn • GitHub • Portfolio
 
-### ⭐️ Star This Repo
+⭐️ Star This Repo
 If you find this useful, feel free to give it a ⭐️ to support the project!
