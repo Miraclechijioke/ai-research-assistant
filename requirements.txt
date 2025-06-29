@@ -4,9 +4,7 @@ openai
 faiss-cpu
 python-dotenv
 streamlit
-langchain
-faiss-cpu 
-openai
+langchain-openai
 tiktoken
 langchain-community
 
