@@ -23,6 +23,8 @@ def split_text(text):
     return chunks
 
 def create_vector_store(chunks):
+    # ✅ Use Streamlit secrets
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
     if not openai_key:
         raise ValueError("Missing OPENAI_API_KEY. Please set it in .env or Streamlit secrets.")
         
