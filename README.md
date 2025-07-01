@@ -1,6 +1,6 @@
 # 🧠 AI Research Assistant
 
-An intelligent PDF-based research assistant that summarizes academic papers and answers questions about them — built with **Streamlit**, **LangChain**, **FAISS**, and **OpenAI's GPT**.
+An intelligent PDF-based research assistant that summarizes and answers questions about academic papers, technical documents, invoices, and more. Built with **Streamlit**, **LangChain**, **FAISS**, and **OpenAI's GPT**.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Built%20With-LangChain-blue?style=flat-square" />
