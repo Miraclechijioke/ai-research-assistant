@@ -31,8 +31,9 @@ ai-research-assistant/
 ├── .env # API key (excluded via .gitignore)
 ├── sample_papers/ # Example PDFs (optional)
 ├── vector_store/ # Temporary FAISS vector index
-├── .streamlit/ # Store secrets keys (excluded via .gitignore)
-
+├── .streamlit/
+│   └── secrets.toml  # Not tracked by Git
+└── README.md
 ```
 ---
 ## 🚀 Getting Started
@@ -71,6 +72,9 @@ streamlit run app.py
 -OpenAI API
 
 -PyMuPDF
+
+## 🛡️ Security Note
+Your OpenAI API key is required to run this app. Never expose your key publicly. Use .streamlit/secrets.toml or environment variables to keep it safe.
 
 ## 👨‍💻 Author
 **Miracle Chijioke Alozie**
