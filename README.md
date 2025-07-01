@@ -31,6 +31,7 @@ ai-research-assistant/
 ├── .env # API key (excluded via .gitignore)
 ├── sample_papers/ # Example PDFs (optional)
 ├── vector_store/ # Temporary FAISS vector index
+├── .streamlit/ # Store secrets keys (excluded via .gitignore)
 
 ```
 ---
