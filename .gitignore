@@ -6,3 +6,5 @@ test.ipynb
 test_env.py
 .streamlit/*
 !.streamlit/.gitkeep
+app_test.py
+.ipynb_checkpoints/
