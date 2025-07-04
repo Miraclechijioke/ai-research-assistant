@@ -30,6 +30,14 @@ if uploaded_pdf:
         vectordb = create_vector_store(chunks)  # Create FAISS vector store for similarity search
         st.success(f"✅ PDF processed into {len(chunks)} chunks.")  # Notify success
 
+        # Determine k based on chunk count
+        if len(chunks) <= 10:
+            k = 3
+        elif len(chunks) <= 30:
+            k = 5
+        else:
+            k = 10
+
         # --- Auto Summary ---
     with st.spinner("Summarizing the document..."):
         summary_prompt = f"Summarize this document:\n\n{text[:3000]}"  # first 3000 chars
@@ -39,13 +47,13 @@ if uploaded_pdf:
     st.markdown("### 📌 Document Summary:")
     st.write(summary)
 
-    # === Accept Question from User ===
+    st.info(f"Auto-selected top {k} chunks based on document size.")
 
+    # === Accept Question from User ===
     query = st.text_input("Ask a question about the document:")  # Text input for user query
 
     if query:
         with st.spinner("Searching for answers..."):  # Show loading during processing
-            k = st.slider("Select number of Chunks to retrieve", min_value=1, max_value=20, value=3)
             docs = vectordb.similarity_search(query, k=k)  # Retrieve top "k" relevant chunks based on user selection for "k"
             llm = OpenAI(temperature=0)  # Initialize GPT model with deterministic output
             chain = load_qa_chain(llm, chain_type="stuff")  # Load a basic QA chain (stuff method)
@@ -54,3 +62,5 @@ if uploaded_pdf:
         # === Display Answer ===
         st.markdown("### 🧠 Answer:")
         st.write(answer)  # Show the answer on the page
+
+    
