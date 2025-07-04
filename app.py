@@ -28,7 +28,7 @@ if uploaded_pdf:
         text = extract_text_from_pdf(uploaded_pdf)  # Extract raw text from the PDF
         chunks = split_text(text)  # Split the text into manageable chunks
         vectordb = create_vector_store(chunks)  # Create FAISS vector store for similarity search
-        st.success(f"✅ PDF processed into {len(chunks)} chunks.")  # Notify success
+        st.success(f"✅ PDF processed into {len(chunks)} chunks.")  # Notify task success
 
         # Determine k based on chunk count
         if len(chunks) <= 10:
