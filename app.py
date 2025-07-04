@@ -45,7 +45,8 @@ if uploaded_pdf:
 
     if query:
         with st.spinner("Searching for answers..."):  # Show loading during processing
-            docs = vectordb.similarity_search(query, k=3)  # Retrieve top 3 relevant chunks
+            k = st.slider("Select number of Chunks to retrieve", min_value=1, max_value=20, value=3)
+            docs = vectordb.similarity_search(query, k=k)  # Retrieve top "k" relevant chunks based on user selection for "k"
             llm = OpenAI(temperature=0)  # Initialize GPT model with deterministic output
             chain = load_qa_chain(llm, chain_type="stuff")  # Load a basic QA chain (stuff method)
             answer = chain.run(input_documents=docs, question=query)  # Generate answer
