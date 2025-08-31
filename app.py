@@ -1,66 +1,77 @@
 # === Import Necessary Libraries ===
-
-import streamlit as st  # Web app UI framework
-from utils import extract_text_from_pdf, split_text, create_vector_store  # Custom functions from utils.py
-from langchain.llms import OpenAI  # LLM interface to interact with OpenAI's GPT
-from langchain.chains.question_answering import load_qa_chain  # Pre-built QA pipeline
-from dotenv import load_dotenv  # For loading environment variables from .env file
-import os  # OS-level operations (e.g., accessing env vars)
+import streamlit as st
+from utils import extract_text_from_pdf, split_text, create_vector_store, load_vector_store
+from langchain.llms import OpenAI
+from langchain.chains.question_answering import load_qa_chain
+from dotenv import load_dotenv
+import os
 
 # === Load Environment Variables ===
-
-load_dotenv()  # Load API keys and config from .env file
-openai_api_key = os.getenv("OPENAI_API_KEY")  # Access the OpenAI API key securely
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # === Configure Streamlit Page ===
-
-st.set_page_config(page_title="AI PDF Assistant", layout="centered")  # Set tab title and layout
-st.title("📄 AI Top Research Assistant")  # Main page title
+st.set_page_config(page_title="AI PDF Assistant", layout="centered")
+st.title("📄 AI Top Research Assistant")
 
 # === Upload PDF ===
-
-uploaded_pdf = st.file_uploader("Upload a PDF file", type="pdf")  # Upload widget (PDF only)
+uploaded_pdf = st.file_uploader("Upload a PDF file", type="pdf")
 
 # === Process PDF if Uploaded ===
-
 if uploaded_pdf:
-    with st.spinner("Processing PDF..."):  # Show loading animation
-        text = extract_text_from_pdf(uploaded_pdf)  # Extract raw text from the PDF
-        chunks = split_text(text)  # Split the text into manageable chunks
-        vectordb = create_vector_store(chunks)  # Create FAISS vector store for similarity search
-        st.success(f"✅ PDF processed into {len(chunks)} chunks.")  # Notify task success
+    try:
+        with st.spinner("Processing PDF..."):
+            text = extract_text_from_pdf(uploaded_pdf)
+            chunks = split_text(text)
 
-        # Determine k based on chunk count
-        if len(chunks) <= 10:
-            k = 3
-        elif len(chunks) <= 30:
-            k = 5
-        else:
-            k = 10
+            # Try loading vector store first (if already exists)
+            vectordb = load_vector_store()
+            if not vectordb:
+                vectordb = create_vector_store(chunks)
+
+            st.success(f"✅ PDF processed into {len(chunks)} chunks.")
+
+            # Adaptive top-k selection
+            if len(chunks) <= 10:
+                k = 3
+            elif len(chunks) <= 30:
+                k = 5
+            else:
+                k = 10
 
         # --- Auto Summary ---
-    with st.spinner("Summarizing the document..."):
-        summary_prompt = f"Summarize this document:\n\n{text[:3000]}"  # first 3000 chars
-        llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
-        summary = llm.predict(summary_prompt)
+        with st.spinner("Summarizing the document..."):
+            summary_prompt = f"Summarize this document:\n\n{text[:3000]}"  # Limit size
+            llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
+            summary = llm.predict(summary_prompt)
 
-    st.markdown("### 📌 Document Summary:")
-    st.write(summary)
+        st.markdown("### 📌 Document Summary:")
+        st.write(summary)
 
-    st.info(f"Auto-selected top {k} chunks based on document size.")
+        st.info(f"Auto-selected top {k} chunks based on document size.")
 
-    # === Accept Question from User ===
-    query = st.text_input("Ask a question about the document:")  # Text input for user query
+        # === Accept Question from User ===
+        query = st.text_input("Ask a question about the document:")
 
-    if query:
-        with st.spinner("Searching for answers..."):  # Show loading during processing
-            docs = vectordb.similarity_search(query, k=k)  # Retrieve top "k" relevant chunks based on user selection for "k"
-            llm = OpenAI(temperature=0)  # Initialize GPT model with deterministic output
-            chain = load_qa_chain(llm, chain_type="stuff")  # Load a basic QA chain (stuff method)
-            answer = chain.run(input_documents=docs, question=query)  # Generate answer
+        if query:
+            with st.spinner("Searching for answers..."):
+                docs = vectordb.similarity_search(query, k=k)
 
-        # === Display Answer ===
-        st.markdown("### 🧠 Answer:")
-        st.write(answer)  # Show the answer on the page
+                # Show sources/pages in results
+                context_info = "\n".join(
+                    [f"- Page {doc.metadata.get('page', '❓')}: {doc.page_content[:200]}..." for doc in docs]
+                )
 
-    
+                llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
+                chain = load_qa_chain(llm, chain_type="stuff")
+                answer = chain.run(input_documents=docs, question=query)
+
+            # === Display Answer ===
+            st.markdown("### 🧠 Answer:")
+            st.write(answer)
+
+            with st.expander("🔎 Context Chunks Used"):
+                st.write(context_info)
+
+    except Exception as e:
+        st.error(f"❌ An error occurred: {e}")
