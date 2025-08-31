@@ -11,41 +11,72 @@ load_dotenv()
 
 # --- Function to extract text from an uploaded PDF file ---
 def extract_text_from_pdf(pdf_file):
-    # Open the PDF file in-memory using PyMuPDF
-    doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
-    text = ""
-    
-    # Loop through each page and extract text content
-    for page in doc:
-        text += page.get_text()
-    
-    return text  # Return the full extracted text from all pages
+    try:
+        doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
+        text = ""
+        for page in doc:
+            text += page.get_text()
+        return text
+    except Exception as e:
+        st.error(f"❌ Error extracting text from PDF: {e}")
+        return ""
 
 # --- Function to split long text into smaller chunks for embedding ---
 def split_text(text):
-    # Create a splitter that splits text at newlines into chunks of 1000 characters
-    # with an overlap of 200 characters for better context retention
-    splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200)
-    
-    # Split the full text into chunks
-    chunks = splitter.split_text(text)
-    
-    return chunks  # Return the list of text chunks
+    try:
+        splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=200)
+        chunks = splitter.split_text(text)
+        return chunks
+    except Exception as e:
+        st.error(f"❌ Error splitting text: {e}")
+        return []
 
 # --- Function to create a FAISS vector store from text chunks ---
-def create_vector_store(chunks):
-    # Attempt to get the OpenAI API key from Streamlit secrets first
-    # If not found, fall back to checking system environment variables
-    openai_api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else os.getenv("OPENAI_API_KEY")
+def create_vector_store(chunks, store_name="vector_store"):
+    try:
+        # API Key from Streamlit secrets or environment variable
+        openai_api_key = (
+            st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else os.getenv("OPENAI_API_KEY")
+        )
 
-    # Raise an error if no API key is found
-    if not openai_api_key:
-        raise ValueError("❌ Missing OPENAI_API_KEY. Set it in .env or .streamlit/secrets.toml.")
+        if not openai_api_key:
+            raise ValueError("❌ Missing OPENAI_API_KEY. Set it in .env or .streamlit/secrets.toml.")
 
-    # Generate embeddings for the text chunks using OpenAI
-    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+        embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
-    # Create a FAISS vector store from the embedded text chunks
-    vectordb = FAISS.from_texts(chunks, embeddings)
+        # Create FAISS vector store
+        vectordb = FAISS.from_texts(chunks, embeddings)
 
-    return vectordb  # Return the FAISS vector database for later querying
+        # Ensure the store folder exists
+        os.makedirs(store_name, exist_ok=True)
+
+        # Save the vector store locally (similar to HuggingFace style persistence)
+        faiss_path = os.path.join(store_name, "faiss_index")
+        vectordb.save_local(faiss_path)
+
+        st.success(f"✅ Vector store saved at: {faiss_path}")
+        return vectordb
+    except Exception as e:
+        st.error(f"❌ Error creating vector store: {e}")
+        return None
+
+# --- Function to load an existing FAISS vector store ---
+def load_vector_store(store_name="vector_store"):
+    try:
+        openai_api_key = (
+            st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else os.getenv("OPENAI_API_KEY")
+        )
+
+        if not openai_api_key:
+            raise ValueError("❌ Missing OPENAI_API_KEY. Set it in .env or .streamlit/secrets.toml.")
+
+        embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+        faiss_path = os.path.join(store_name, "faiss_index")
+
+        vectordb = FAISS.load_local(faiss_path, embeddings, allow_dangerous_deserialization=True)
+
+        st.success(f"✅ Vector store loaded from: {faiss_path}")
+        return vectordb
+    except Exception as e:
+        st.error(f"❌ Error loading vector store: {e}")
+        return None
